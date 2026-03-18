@@ -7,7 +7,7 @@
 function isValidOs() {
 	try {
 		$boolIsValid = $False;
-		$arrstrAllowedOSes = @( 'Microsoft Windows Server 2019 Standard', 'Microsoft Windows Server 2016 Standard','Microsoft Windows Server 2012 R2 Standard','Microsoft Windows Server 2012 Standard');
+		$arrstrAllowedOSes = @( 'Microsoft Windows Server 2025 Standard', 'Microsoft Windows Server 2022 Standard', 'Microsoft Windows Server 2019 Standard', 'Microsoft Windows Server 2016 Standard','Microsoft Windows Server 2012 R2 Standard','Microsoft Windows Server 2012 Standard');
 		$strOsName = ( Get-WmiObject -Class win32_operatingsystem ).caption;
 		$arrstrAllowedOSes | ForEach-Object { if ( $strOsName.toLower().Contains( $_.toLower() ) ) { $boolIsValid = $True; } };		
 	} catch {
@@ -129,6 +129,8 @@ function getCertificatePath( $strDriveLetter ) {
 	$strOsName = ( Get-WmiObject -Class win32_operatingsystem ).caption;
 
 	switch ( $strOsName ) {
+	    "Microsoft Windows Server 2025 Standard" { $strPath = "$strDriveLetter\amd64\2k25"; Break; }
+	    "Microsoft Windows Server 2022 Standard" { $strPath = "$strDriveLetter\amd64\2k22"; Break; }
 		"Microsoft Windows Server 2019 Standard" { $strPath = "$strDriveLetter\amd64\2k19"; Break; }
 		"Microsoft Windows Server 2016 Standard" { $strPath = "$strDriveLetter\amd64\2k16"; Break; }
 		"Microsoft Windows Server 2012 R2 Standard" { $strPath = "$strDriveLetter\amd64\2k12R2"; Break; }
